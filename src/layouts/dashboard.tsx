@@ -3,9 +3,10 @@ import React, { useState, useEffect } from 'react';
 import logo from '../logo.svg'
 import useDarkMode from '../hooks/useDarkMode';
 import useDirection from '../hooks/useDirection';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import i18n from '../i18n';
 import { useTranslation } from 'react-i18next';
+import { Button } from '@mui/joy';
 
 
 export default function Dashboard(props: {
@@ -65,8 +66,11 @@ export default function Dashboard(props: {
 
 
     const { toggleDark } = useDarkMode()
-
-
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        localStorage.removeItem('AuthToken')
+        navigate('/')
+    } 
 
     function changeLang(lang: string) {
         i18n.changeLanguage(lang)
@@ -157,8 +161,8 @@ export default function Dashboard(props: {
                         <button className="text-xl cursor-pointer i-carbon-notification hover:bg-slate-500 text-slate-600 dark:text-white" />
                         {/* avatar */}
                         <div className="flex items-center cursor-pointer">
-                            <img className="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" />
-
+                            {/* <img className="w-8 h-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="" /> */}
+                            <Button onClick={handleLogout}>Log Out</Button>
                         </div>
                     </div>
 

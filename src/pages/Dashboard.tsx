@@ -4,6 +4,11 @@ import { useTranslation } from 'react-i18next';
 import Card from '../components/core/Card';
 import 'chart.js/auto';
 import { Doughnut, Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2';
+import axios from 'axios';
+import LineComponent from './components/LineComponent';
+// import { getStockData } from '../services/stockData';
+
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -14,6 +19,7 @@ import {
     Legend,
 } from 'chart.js';
 import faker from 'faker';
+import { useNavigate } from 'react-router-dom';
 
 export const options = {
     responsive: true,
@@ -28,23 +34,36 @@ export const options = {
     },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+const labelshaha = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
 
-export const data = {
-    labels,
+export const datahaha = {
+    labels: labelshaha,
     datasets: [
         {
             label: 'Dataset 1',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+            data: labelshaha.map(() =>{ 
+            return faker.datatype.number({ min: 0, max: 1000 })}
+            ),
             backgroundColor: '#59ddaa',
         },
         {
             label: 'Dataset 2',
-            data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
+            data: labelshaha.map(() =>{ 
+                return faker.datatype.number({ min: 0, max: 1000 })}
+                ),
             backgroundColor: '#fe3a82',
+        },
+        {
+            label: 'Dataset 2',
+            data: labelshaha.map(() =>{ 
+                return faker.datatype.number({ min: 0, max: 1000 })}
+                ),
+            backgroundColor: '#fe4a02',
         },
     ],
 };
+
+// console.log("datahaha", datahaha);
 
 ChartJS.register(
     CategoryScale,
@@ -54,35 +73,17 @@ ChartJS.register(
     Tooltip,
     Legend
 );
+
+
 export default function About() {
+    const [stockName, setStockName] = useState<any>("RELIANCE.BSE");
+    const navigate = useNavigate();
 
-
-    const doughnutOptions = {
-        data: {
-            datasets: [
-                {
-                    data: [11, 39, 50],
-                    /**
-                     * These colors come from Tailwind CSS palette
-                     * https://tailwindcss.com/docs/customizing-colors/#default-color-palette
-                     */
-                    backgroundColor: ['#59ddaa', '#9c64f2', '#fe3a82'],
-                    label: 'Dataset 1',
-                },
-            ],
-            labels: ['Shoes', 'Shirts', 'Bags'],
-        },
-        options: {
-            responsive: true,
-            cutoutPercentage: 80,
-        },
-        legend: {
-            display: false,
-        },
-    }
-
-
-
+    useEffect(() => {
+        if(localStorage.getItem('AuthToken') == null){
+            navigate('/')
+        }
+    }, [])
 
     return (
         <Dashboard >
@@ -159,11 +160,12 @@ export default function About() {
 
                     <div className='flex flex-col w-full space-x-4 space-y-4 rtl:pl-1 md:flex-row charts rtl:space-x-reverse'>
 
-                        <Card className='flex items-center md:w-4/12 first:mt-4 first:ml-4'>
+                        {/* <Card className='flex items-center md:w-4/12 first:mt-4 first:ml-4'>
                             <Doughnut {...doughnutOptions} />
-                        </Card>
-                        <Card className='md:w-8/12'>
-                            <Bar options={options} data={data} />
+                        </Card> */}
+                        <Card className='md:w-12/12'>
+                            {/* { tableData.labels.length > 50 ? (<Line options={options} data={tableData} />) : (<h1>No data yet</h1>) } */}
+                            <LineComponent stockName={stockName}/>
                         </Card>
                     </div>
                 </section>

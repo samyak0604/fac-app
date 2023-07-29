@@ -1,0 +1,1 @@
+import{a as t,j as a}from"./index.a30ce03c.js";import{S as l,O as e}from"./Select.1055f477.js";function s(){return t(l,{defaultValue:"dog",children:[a(e,{value:"dog",children:"Dog"}),a(e,{value:"cat",children:"Cat"})]})}export{s as default};
