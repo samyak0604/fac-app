@@ -76,9 +76,9 @@ ChartJS.register(
 
 
 export default function About() {
-    const [stockName, setStockName] = useState<any>("RELIANCE.BSE");
+    const [stockName, setStockName] = useState<any>("RELIANCE.NS");
     const navigate = useNavigate();
-
+    const [MonthlyDifference, set30DayDifference] = useState<any>(0);
     useEffect(() => {
         if(localStorage.getItem('AuthToken') == null){
             navigate('/')
@@ -98,16 +98,16 @@ export default function About() {
                                 </div>
                                 <div className='text-center'>
                                     <h1 className='text-4xl font-black'>
-                                        $5.670
+                                        Rs. {MonthlyDifference}
                                     </h1>
                                     <span className='text-xs '>
-                                        Earned this month
+                                        30 Day
                                     </span>
                                 </div>
                             </div>
 
                         </Card>
-                        <Card className='flex-1'>
+                        {/* <Card className='flex-1'>
                             <div className='flex items-center justify-center h-32 space-x-4 rtl:space-x-reverse min-w-max'>
                                 <div className='flex items-center justify-center p-2 rounded-full w-14 h-14 bg-primary-100'>
                                     <span i="carbon-user" className='text-2xl text-primary-500'></span>
@@ -154,7 +154,7 @@ export default function About() {
                                 </div>
                             </div>
 
-                        </Card>
+                        </Card> */}
 
                     </div>
 
@@ -165,7 +165,7 @@ export default function About() {
                         </Card> */}
                         <Card className='md:w-12/12'>
                             {/* { tableData.labels.length > 50 ? (<Line options={options} data={tableData} />) : (<h1>No data yet</h1>) } */}
-                            <LineComponent stockName={stockName}/>
+                            <LineComponent stockName={stockName} set30DayDifference={set30DayDifference}/>
                         </Card>
                     </div>
                 </section>

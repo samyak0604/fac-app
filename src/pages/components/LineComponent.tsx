@@ -18,7 +18,7 @@ export const options = {
         },
     },
 };
-const LineComponent = (props:any) => {
+const LineComponent = ({stockName, set30DayDifference}) => {
     const [selectedStock, setSelectedStock] = useState<any>('ADANIENT.NS');
     const [stocksList, setStocksList] = useState<any>([]);
     const [tableData, setTableData] = useState<any>({
@@ -57,6 +57,7 @@ const LineComponent = (props:any) => {
                 }
             });
             setStocksList(stocksListTemp);
+            set30DayDifference(parseInt(Number(dataTemp[dataTemp.length-1]-dataTemp[0])));
         }).catch((error:any) => {
             console.log("error", error);
         });
