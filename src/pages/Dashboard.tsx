@@ -98,7 +98,7 @@ export default function About() {
                                 </div>
                                 <div className='text-center'>
                                     <h1 className='text-4xl font-black'>
-                                        Rs. {MonthlyDifference}
+                                        Rs=0 {MonthlyDifference}
                                     </h1>
                                     <span className='text-xs '>
                                         30 Day
